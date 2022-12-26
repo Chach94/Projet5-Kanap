@@ -1,7 +1,7 @@
 
 let params = new URLSearchParams(window.location.search)
 let id = params.get("id");
-console.log(id);
+
 
 fetch(`http://localhost:3000/api/products/${id}`)
     .then(function (r) {
@@ -10,7 +10,7 @@ fetch(`http://localhost:3000/api/products/${id}`)
         }
     })
     .then(function (productId) {
-        console.log(productId);
+
 
         let itemImg = document.querySelector('.item__img');
         let img = document.createElement('img');
@@ -20,7 +20,7 @@ fetch(`http://localhost:3000/api/products/${id}`)
 
         let title = document.querySelector('#title');
         title.textContent = productId.name;
-        console.log(title);
+
 
         let price = document.querySelector('#price');
         price.textContent = productId.price;
@@ -34,7 +34,58 @@ fetch(`http://localhost:3000/api/products/${id}`)
            `
         }
 
+
     })
+
+
     .catch(function (err) {
         // erreur 
     })
+
+
+let colors = document.getElementById('colors')
+let addToCart = document.getElementById('addToCart');
+let quantity = document.getElementById('quantity')
+
+// si la quantité est inferieur à 0 et superieur ou égale à 100 alors alert message 
+addToCart.addEventListener('click', () => {
+    if (quantity.value < 0 || quantity.value >= 100) {
+        alert('Veuillez choisir une quantité entre 1 et 100 ')
+        // sinon si la couleur n'est pas remplis alert message 
+    } else if (colors.value === "") {
+        alert('Veuillez choisir une couleur');
+    }
+
+})
+
+addToCart.addEventListener('click', () => {
+
+    let basket = {
+        id: id,
+        color: colors.value,
+        quantity: quantity.value,
+    }
+
+    let basketProduct = localStorage.getItem('basket')
+
+    if (basketProduct == null) {
+        basketProduct = [];
+
+    } else {
+        basketProduct = JSON.parse(basketProduct)
+    }
+
+    let found = false;
+    basketProduct.forEach((p, index) => {
+        if (basket.id === p.id && basket.color === p.color) {
+            p.quantity += basket.quantity;
+            found = true;
+        }
+    })
+
+    if (!found) {
+        basketProduct.push(basket);
+    }
+    localStorage.setItem('basket', JSON.stringify(basketProduct))
+
+})
