@@ -63,7 +63,7 @@ addToCart.addEventListener('click', () => {
     let basket = {
         id: id,
         color: colors.value,
-        quantity: quantity.value,
+        quantity: parseInt(quantity.value),
     }
 
     let basketProduct = localStorage.getItem('basket')
@@ -85,6 +85,9 @@ addToCart.addEventListener('click', () => {
 
     if (!found) {
         basketProduct.push(basket);
+        alert('Votre produit est bien ajouté au panier')
+
+
     }
     localStorage.setItem('basket', JSON.stringify(basketProduct))
 
