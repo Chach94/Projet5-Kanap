@@ -43,28 +43,31 @@ fetch(`http://localhost:3000/api/products/${id}`)
     })
 
 
-let colors = document.getElementById('colors')
+
 let addToCart = document.getElementById('addToCart');
-let quantity = document.getElementById('quantity')
+
 
 // si la quantité est inferieur à 0 et superieur ou égale à 100 alors alert message 
 addToCart.addEventListener('click', () => {
-    if (quantity.value < 0 || quantity.value >= 100) {
-        alert('Veuillez choisir une quantité entre 1 et 100 ')
-        // sinon si la couleur n'est pas remplis alert message 
+    let colors = document.getElementById('colors')
+    let quantity = document.getElementById('quantity')
+
+    if (quantity.value <= 0 || quantity.value >= 100) {
+        alert('Veuillez choisir une quantité entre 1 et 100')
+        return
+
     } else if (colors.value === "") {
-        alert('Veuillez choisir une couleur');
+        alert('Veuillez selectionner votre couleur')
+        return
     }
 
-})
-
-addToCart.addEventListener('click', () => {
 
     let basket = {
         id: id,
         color: colors.value,
         quantity: parseInt(quantity.value),
     }
+    console.log(basket);
 
     let basketProduct = localStorage.getItem('basket')
 
@@ -79,7 +82,13 @@ addToCart.addEventListener('click', () => {
     basketProduct.forEach((p, index) => {
         if (basket.id === p.id && basket.color === p.color) {
             p.quantity += basket.quantity;
+            console.log(p.quantity);
             found = true;
+        }
+        if (p.quantity > 100) {
+            p.quantity -= basket.quantity
+            alert(`La quantité maximal par kanap est de 100 ex`)
+            return
         }
     })
 
