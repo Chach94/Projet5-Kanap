@@ -5,6 +5,7 @@ fetch('http://localhost:3000/api/products')
             return r.json();
         }
     })
+    // reponse avec les donnés de lAPI + boucles avec creation element du DOM 
     .then(function (products) {
         for (let kanap of products) {
             console.log(kanap);
