@@ -19,13 +19,13 @@ fetch('http://localhost:3000/api/products')
             let p = document.createElement("p")
 
             // Variable pour associés parent et enfant + création des class
-            let aReturn = items.appendChild(a);
+            items.appendChild(a);
             console.log(a);
-            let articleReturn = a.appendChild(article);
-            let imgReturn = article.appendChild(img);
-            let h3Return = article.appendChild(h3)
+            a.appendChild(article);
+            article.appendChild(img);
+            article.appendChild(h3)
             h3.classList.add('productName')
-            let pReturn = article.appendChild(p);
+            article.appendChild(p);
             p.classList.add('productDescription')
 
             // injection des données pour affichage produit 
@@ -39,7 +39,7 @@ fetch('http://localhost:3000/api/products')
 
     })
     .catch(function (err) {
-        // erreur 
+        console.log('erreur')
     })
 
 

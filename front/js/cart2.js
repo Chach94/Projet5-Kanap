@@ -1,12 +1,12 @@
-// je recupère le panier du local storage sur ma page panier 
-// création fonction 
+// variable pour recuperer le localstorage 
 let basketProduct = localStorage.getItem('basket')
+
 let totalQuantity = document.getElementById('totalQuantity');
 let totalPrice = document.getElementById('totalPrice');
 let totalItems = 0;
 let totalsPrice = 0;
 
-
+// fonction pour recuperer le localstorage avec condition si le panier est vide 
 function getBasket() {
     if (basketProduct == null || basketProduct.length === 0) {
         basketProduct == []
@@ -247,9 +247,6 @@ emailValue()
 function FormToCheck() {
     if (regexName.test(firstName.value) == false || regexAddress.test(address.value) == false || regexName.test(lastName.value) == false || regexEmail.test(email.value) == false || regexName.test(city.value) == false) {
         alert('Merci de remplir le formulaire correctement')
-        return false
-    } else if (firstName.value == '' && lastName.value == '' && email.value == '' && city.value == '' && address.value == '') {
-        alert('Tout les champs doivent être remplis pour valider la commande ')
         return false
     } else if (basketProduct == null || basketProduct == '') {
         alert('Votre panier est vide')
