@@ -115,6 +115,12 @@ function changeQuantity() {
 
                 if (article.id === cart.dataset.id && article.color === cart.dataset.color) { // l'id du local storage est === data-id et meme chose pour couleur 
                     article.quantity = parseInt(e.target.value) // alors la quantité du localstorage est egale a la valeur de l'evenement 
+
+                    if (e.target.value > 100 || e.target.value <= 0) {
+                        alert('quantité comprise entre 1 et 100 ex ')
+                        return
+                    }
+
                     localStorage.setItem('basket', JSON.stringify(basketProduct)) // j'enregistre la nouvelle valeur 
 
                     cart.dataset.quantity = e.target.value; // je modifie la valeur d'affichage avec la valeur récuperer par l'evenement 
@@ -123,6 +129,7 @@ function changeQuantity() {
 
 
                 }
+
             }
 
         })
@@ -180,7 +187,7 @@ let regexEmail = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,
 function firstNameValue() {
     firstName.addEventListener('change', () => {
         if (regexName.test(firstName.value)) {
-            firstNameErrorMsg.innerHTML = 'Ok'
+            firstNameErrorMsg.innerHTML = ''
             return true
         } else {
             firstNameErrorMsg.innerHTML = 'Veuillez saisir un prénom valide'
@@ -193,7 +200,7 @@ firstNameValue()
 function lastNameValue() {
     lastName.addEventListener('change', () => {
         if (regexName.test(lastName.value)) {
-            lastNameErrorMsg.innerHTML = 'Ok'
+            lastNameErrorMsg.innerHTML = ''
             return true
         } else {
             lastNameErrorMsg.innerHTML = 'Veuillez saisir un nom valide'
@@ -207,7 +214,7 @@ lastNameValue()
 function addressValue() {
     address.addEventListener('change', () => {
         if (regexAddress.test(address.value)) {
-            addressErrorMsg.innerHTML = 'Ok'
+            addressErrorMsg.innerHTML = ''
             return true
         } else {
             addressErrorMsg.innerHTML = 'Veuillez saisir une adresse valide'
@@ -220,7 +227,7 @@ addressValue()
 function cityValue() {
     city.addEventListener('change', () => {
         if (regexName.test(city.value)) {
-            cityErrorMsg.innerHTML = 'Ok'
+            cityErrorMsg.innerHTML = ''
             return true
         } else {
             cityErrorMsg.innerHTML = 'Veuillez saisir une adresse valide'
@@ -233,7 +240,7 @@ cityValue()
 function emailValue() {
     email.addEventListener('change', () => {
         if (regexEmail.test(email.value)) {
-            emailErrorMsg.innerHTML = 'Ok'
+            emailErrorMsg.innerHTML = ''
             return true
         } else {
             emailErrorMsg.innerHTML = 'Veuillez saisir une adresse valide'

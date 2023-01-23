@@ -108,10 +108,10 @@ function saveAndGetBasket(basket) {
 
     if (!found) {
         basketProduct.push(basket);
-        alert('Votre produit est bien ajouté au panier')
+
 
     }
-
+    alert('Votre produit est bien ajouté au panier')
     localStorage.setItem('basket', JSON.stringify(basketProduct))
 
 }
